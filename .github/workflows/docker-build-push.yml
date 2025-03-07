@@ -21,8 +21,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/hello-world-java:latest .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/hello-world-javaA:latest .
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/hello-world-java:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/hello-world-javaA:latest
