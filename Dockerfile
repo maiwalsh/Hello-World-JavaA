@@ -1,17 +1,23 @@
-# Use an official OpenJDK runtime as a parent image
-FROM maven:3.9.6-eclipse-temurin-21
+# Use Maven with OpenJDK as the base image for both build and runtime
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the Java file to the container
-# COPY Hello.java .
+# Copy the entire project (including pom.xml and source code)
+COPY . .
 
-# Add dependencies for Maven and other tools if required
-COPY ./target/HelloWorldKafka-1.0-SNAPSHOT.jar /app/HelloWorldKafka.jar
+# Build the Java application inside the container
+RUN mvn clean package
 
-# Compile the Java program
-# RUN javac Hello.java
+# Use the same Maven image for runtime
+FROM maven:3.9.6-eclipse-temurin-21
 
-# Set the entry point to run the Java application
+# Set the working directory
+WORKDIR /app
+
+# Copy the built JAR from the previous stage
+COPY --from=build /app/target/HelloWorldKafka-1.0-SNAPSHOT.jar /app/HelloWorldKafka.jar
+
+# Command to run the application
 CMD ["java", "-jar", "/app/HelloWorldKafka.jar"]

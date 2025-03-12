@@ -1,3 +1,5 @@
+package com.maiwalsh;
+
 import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.StringSerializer;
 import java.util.Properties;
@@ -8,7 +10,7 @@ public class HelloWorldProducer {
 
         // Kafka producer configuration
         Properties properties = new Properties();
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "broker:29092"); // Kafka broker address
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "confluent-broker.recrocog.com:9092"); // Kafka broker address
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
