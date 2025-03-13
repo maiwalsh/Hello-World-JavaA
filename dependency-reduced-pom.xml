@@ -20,7 +20,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>com.maiwalsh.HelloWorldProducer</mainClass>
+              <mainClass>com.maiwalsh.JavaProducer</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -37,7 +37,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>com.maiwalsh.HelloWorldProducer</mainClass>
+                  <mainClass>com.maiwalsh.JavaProducer</mainClass>
                 </transformer>
               </transformers>
             </configuration>

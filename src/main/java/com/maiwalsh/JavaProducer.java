@@ -2,7 +2,9 @@ package com.maiwalsh;
 
 import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.StringSerializer;
+
 import java.util.Properties;
+import java.util.Scanner;
 
 public class JavaProducer {
     public static void main(String[] args) {
@@ -17,16 +19,33 @@ public class JavaProducer {
         // Create Kafka producer instance
         Producer<String, String> producer = new KafkaProducer<>(properties);
 
-        // Send a simple message
-        ProducerRecord<String, String> record = new ProducerRecord<>(topic, "key1", "Hello from the Producer!");
-        producer.send(record, (metadata, exception) -> {
-            if (exception == null) {
-                System.out.println("Sent message to topic: " + metadata.topic() + " partition: " + metadata.partition());
-            } else {
-                exception.printStackTrace();
-            }
-        });
+        // Scanner for user input
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter messages to send to Kafka. Type 'exit' to stop.");
 
+        while (true) {
+            System.out.print("> ");
+            String message = scanner.nextLine();
+
+            if ("exit".equalsIgnoreCase(message)) {
+                System.out.println("Exiting producer...");
+                break;
+            }
+
+            ProducerRecord<String, String> record = new ProducerRecord<>(topic, "key1", message);
+            producer.send(record, (metadata, exception) -> {
+                if (exception == null) {
+                    System.out.println("Sent message: '" + message + "' to topic: " + metadata.topic() + 
+                                       " | partition: " + metadata.partition() + 
+                                       " | offset: " + metadata.offset());
+                } else {
+                    exception.printStackTrace();
+                }
+            });
+        }
+
+        // Cleanup
+        scanner.close();
         producer.close();
     }
 }
