@@ -17,7 +17,7 @@ FROM maven:3.9.6-eclipse-temurin-21
 WORKDIR /app
 
 # Copy the built JAR from the previous stage
-COPY --from=build /app/target/HelloWorldKafka-1.0-SNAPSHOT.jar /app/HelloWorldKafka.jar
+COPY --from=build /app/target/kafka-integration-1.0-SNAPSHOT.jar /app/kafka-integration.jar
 
 # Command to run the application
-CMD ["java", "-jar", "/app/HelloWorldKafka.jar"]
+CMD ["java", "-jar", "/app/kafka-integration.jar"]
