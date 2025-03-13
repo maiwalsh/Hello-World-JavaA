@@ -4,7 +4,7 @@ import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.StringSerializer;
 import java.util.Properties;
 
-public class HelloWorldProducer {
+public class JavaProducer {
     public static void main(String[] args) {
         String topic = "test-topic"; // Set your Kafka topic
 
